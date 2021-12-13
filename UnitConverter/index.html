@@ -57,16 +57,19 @@
         setAmount(event.target.value);
       };
       const onFlip = () => {
+        reset();
         setFlipped((current) => !current);
       };
+      const reset = () => setAmount(0);
       return (
         <div>
           <div>
-            <label for="Km">Km:</label>
+            <label for="Km">Km: </label>
             <input
               id="Km"
-              value={amount}
+              value={flipped ? (amount * 1.609344).toFixed(6) : amount}
               type="number"
+              placeholder="Km"
               onChange={onChange}
               disabled={flipped}
             />
@@ -75,12 +78,14 @@
             <label for="Miles">Miles: </label>
             <input
               id="Miles"
-              value={amount}
+              value={flipped ? amount : (amount / 1.609344).toFixed(6)}
               type="number"
-              onChange={onchange}
+              placeholder="Miles"
+              onChange={onChange}
               disabled={!flipped}
             />
           </div>
+          <button onClick={reset}>reset</button>
           <button onClick={onFlip}>Flip</button>
         </div>
       );
