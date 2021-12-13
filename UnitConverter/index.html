@@ -85,13 +85,13 @@
               disabled={!flipped}
             />
           </div>
-          <button onClick={reset}>reset</button>
+          <button onClick={reset}>Reset</button>
           <button onClick={onFlip}>Flip</button>
         </div>
       );
     }
     function App() {
-      const [index, setIndex] = React.useState("0");
+      const [index, setIndex] = React.useState("select");
       const onSelect = (event) => {
         setIndex(event.target.value);
       };
@@ -99,9 +99,12 @@
         <div>
           <h1>Super Converter</h1>
           <select value={index} onChange={onSelect}>
+            <option value="select">Select your units</option>
             <option value="0">Minutes & Hours</option>
             <option value="1">Km & Miles</option>
           </select>
+          <hr />
+          {index === "select" ? "Please select your units 😎" : null}
           {index === "0" ? <MinutesToHours /> : null}
           {index === "1" ? <KmToMiles /> : null}
         </div>
